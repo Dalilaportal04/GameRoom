@@ -1,0 +1,482 @@
+def menu():                                                    # create a function called menu with
+    print("[1] Rock-Paper-Scissors")                           # the purposes of having it print out the lines
+    print("[2] Higher or Lower")
+    print("[3] Text Based Adventure Game")
+    print("[0] Exit program")
+
+menu()
+try:
+    option = int(input("Enter the NUMBER to play a game: "))      # have the user beside on the input that will later cause the program to
+except ValueError:
+    print("Sorry that us not a valid response please try again. Choose 1,2,3, or 0")
+    exit()
+                                                              # work based on the users decision, which is guided by the last print
+while option != 0:
+    if option == 1:                                           # create a loop for the menu
+        #Do the tast of 1                                     # if the user inputs 1, they will play game 1, # input 2 = game 2, 0 exits the program
+        import random
+
+        wins = 0                                             # import random because you will have the computer randomly pick between 3 options
+        games = 0                                            # have wins, games and ties with the value of 0 since these will record your score
+        ties = 0
+
+        while True:                                          # create an infinite loop that will be broken once the player besides to quit
+            print ("")
+            print ("*Lets Play Rock-Paper-Scissors*")        # welcoming print statement
+            print ("")
+
+            computer_options = ["rock", "paper", "scissors"]          # give the values of rock, paper, and scissors inside a list
+            computer_choice = random.choice(computer_options)         # utilize the import random by making a function that randomly generates based of the list options
+
+            user_choice = None                                       # give None value for the user_choice to be able to function
+                                                                     # while not in makes the user input the possible options inside the list, anything else will simply reprint the question over and over
+            while user_choice not in computer_options:
+                user_choice = input("What do you choose? rock, paper, or scissors: ").lower()  #.lower() makes all inputs lowercase in case people input lowercase and capital options of the correct input
+
+            if user_choice == computer_choice:                        # if you guess the the computer guesses, its scored as a tie
+                print ("You picked: ", user_choice)                   # print function detailing outcome
+                print ("Opp picked: ", computer_choice)
+                print ("Its a Tie!")
+                ties = ties + 1                                      # record keeping, other viable option to write this is     ties += 1
+                games = games + 1                                                                                              # games += 1
+
+            elif user_choice == "rock":                             #elif only if you choose rock
+                if computer_choice == "paper":
+                    print ("You picked: ", user_choice)                # since you bypassed a tie, the outcomes are winning or losing now
+                    print ("Opp picked: ", computer_choice)            # if computer choose paper, you lose, otherwise you alwys picked scissors so you win
+                    print ("You Lose")
+                    games = games + 1
+                else:
+                    print("You picked: ", user_choice)                 # print statements detailing outcome
+                    print("Opp picked: ", computer_choice)              # continuation of record keeping
+                    print("You win")
+                    wins = wins + 1
+                    games = games + 1
+
+            elif user_choice == "paper":                           # another elif in the scenario were you choose paper
+                if computer_choice == "rock":
+                    print("You picked: ", user_choice)             # same formula as above
+                    print("Opp picked: ", computer_choice)
+                    print("You Win")
+                    wins = wins + 1
+                    games = games + 1
+                else:
+                    print("You picked: ", user_choice)
+                    print("Opp picked: ", computer_choice)
+                    print("You Lose")
+                    games = games + 1
+
+            elif user_choice == "scissors":                     # elif for the last possible situation were you choose scissors
+                if computer_choice == "rock":
+                    print("You picked: ", user_choice)
+                    print("Opp picked: ", computer_choice)     # same formula as above
+                    print("You Lose")
+                    games = games + 1
+                else:
+                    print("You picked: ", user_choice)
+                    print("Opp picked: ", computer_choice)
+                    print("You Win")
+                    wins = wins + 1
+                    games = games + 1
+
+            print ("")
+            play_again = input("PLay again? (To exit press no):").lower()       # after you play a game, you get prompted to make a choice
+            if (play_again == "n") or (play_again == "no"):                     # another game or exit
+                print("")
+                print ("Wins: ", wins)                                # inputs n or no will exit back to menu
+                print ("Ties: ", ties)                                # any other input will let you play again
+                print ("Games: ", games)
+                break                                                 # if they beside to exit, the records will print
+                                                                      # break statemnt to return to menu
+
+
+
+
+    elif option == 2:
+        #Do the task of 2
+        import random                                  # import for random generation
+
+        print("")
+        print("Time to lose all your money!")
+        print("")                                                       # print statement explaining the game
+        print("You will be given a number between 4 and 15.")
+        print("You will guess higher or lower and 3 dice will roll.")
+        print("Heres $100, try not to go broke.")
+        print("")
+
+
+
+
+        money = 100                                      # giving the value for the money which will be used as currency
+
+        while True:                                     # infinite loop, same as game 1
+            choice = None
+            choices = ["higher", "lower"]                # 2 possible choices, higher or lower
+            com_number = random.randint(4, 15)            # random generator, 4 and 15 are used because since were using 3 dice
+                                                          # the smallest possible outcome is 4 and the highest is 15 that that dont end in always winning
+            dice = random.randint(1, 6)
+            dice2 = random.randint(1, 6)                  # random generator for 3 individual dice
+            dice3 = random.randint(1, 6)
+            dice_total = dice + dice2 + dice3            # add the sum so see how it matches with the coputers number
+
+            print("*", com_number, "*")                  # print the computers number
+
+
+
+            while choice not in choices:
+                choice = input("higher or lower: ").lower()          # while choice not in makes infinite loop until correct answear is put
+
+                print("Current $", money)   # show current money
+                try:
+                    bet = float(input("How much would you like to bet: $"))   # ask the player how much they want to bet after deciding on higher or lower
+                except ValueError:
+                    print("Sorry not a valid response.")
+                    exit()
+
+            while bet > money:
+                print("")
+                print("Wrong Input, Try Again")    # dont allow for a bet higher than what they have
+                try:
+                    bet = float(input("How much would you like to bet: $"))   # ask again for bet
+                except ValueError:
+                    print("Sorry not a valid response.")
+                    exit()
+
+            else :
+                print("")                   # it proceeds to show the results of the 3 dice rolls
+                print("Dice 1:", dice)
+                print("Dice 2:", dice2)
+                print("Dice 3:", dice3)
+                print("Total:", dice_total)  # added up the totals
+
+            if choice == "higher":                 #if user choose higher,
+                if com_number <= dice_total:
+                    print("Congratulations.")      # they win
+                    money = money + bet            # add up the winnings on top of current money
+                    print("Current $", money)
+
+                else:
+                    print("I love free money.")   # else always means they choose lower
+                    money = money - bet            # they lose
+                    print("Current $", money)
+
+            if choice == "lower":                  #if user choose lower
+                if com_number <= dice_total:
+                    print("I love free money.")      # show the losses
+                    money = money - bet
+                    print("Current $", money)
+
+                else:
+                    print("Congratulations.")     # else is always winning
+                    money = money + bet
+                    print("Current $", money)
+
+            if money == 0:                        # once user uses all the money, game kicks them out
+                print("")
+                print("Your Broke")
+                break
+
+            print("")
+            play_again = input(
+                "PLay again? (To exit press no):").lower()  # after you play a game, you get prompted to make a choice
+            if (play_again == "n") or (play_again == "no"):  # another game or exit
+                print("")
+                print("Wins: ", wins)  # inputs n or no will exit back to menu
+                print("Ties: ", ties)  # any other input will let you play again
+                print("Games: ", games)
+                break
+
+
+    elif option == 3:
+        #Do the task of 3
+        print ("Option 3 is selected")
+        def main():
+            # Vaild answers for the first question
+            yes = ["Yes", "yes", "y", "Y"]
+            no = ["No", "no", "N", "n"]
+            # Introduction
+            print("Hello gamer! Welcome to the Knight's Final Quest!")
+            print(" ")
+            print(
+                "You are about to embark on an adventure with many possible endings depending on the choices you make, try your best to survive!")
+            print(" ")
+            print(
+                "In this particular adventure you are going to take on the role of a knight doing their last assignment before retiring.")
+            print(" ")
+            input("Lets begin")
+
+            print("___________________________________________________")
+            print(" ")
+            # Storyline routes
+            # Question 1
+            def main1():
+                print(" ")
+                print(
+                    "You are called into the throne room by the king. He says you must go on one last quest even though you had said you were retiring. The quest is getting a teasure guarded by the most dangerous dragon in all the land.")
+                print("")
+                print(
+                    "will you be accepting this dangerous quest from the king or youre not willing to risk your life again so close to retiring? Yes, yes, Y, y or No, no, N, n are all vaild responses.")
+                # Gets the answer input from the user and takes away extra spaces they may of added
+                ans = input()
+                answer = ans.strip()
+                if answer in yes:
+                    print("The king is happy with your bravery and says you can keep 40 percent of the teasure!")
+                    print("")
+                    print("Click enter to continue your journey to find and slay the dragon")
+                    input()
+                    print("")
+
+                    # Question 2
+                    def main2():
+                        print(
+                            "As you set out the castle you realize that you don't know how you will get up the moutain where the dragon lives. You stop by a village near this village and decide to ask two of the locals there for help.")
+                        print("")
+                        print(
+                            "One of them tells you that the fastest way up is through an underground tunnel inside the mountain with ladders., but the other one says that the path is too dangerous and the safest way up, although 2 days slower is the trail that circles the mountain. Which path are you going to take? Trail or tunnel")
+                        ans = input()
+                        answer = ans.lower().strip()
+                        if answer == "trail":
+                            print(
+                                "As you set through the trail you realize that you didn't pack food for such a long trip!")
+                            print("Blaming your old age you start looking around in a panic.")
+
+                            # Question 3
+                            def main3():
+                                print(
+                                    "3 miles ahead you spot a basket with some food sticking out of it, however, it is on a very dangerous part of the cliff and you don’t know what type of food is in it. You are already half a day’s walk into the trail and it is about to get dark. Will you take a risk and get the basket or turn back and go hunting for some more food even though monsters are said to lurk in the darkness. Answer basket or hunting.")
+                                ans = input()
+                                # This one also makes it so that the input is converted to all lowercase
+                                answer = ans.lower().strip()
+                                if answer == "hunting":
+                                    print(
+                                        "You reach the beginning of the trail once again and it is already dark. Using your knowledge from your past experiences you are able to get all the food you need while slaying smaller monsters and hiding from the bigger ones to conserve your energy.")
+
+                                    # Question 4
+                                    def main4():
+                                        print(
+                                            "After 3 days you finally reach the cave where the dragon lives. As you head inside you step on a branch alerting the dragon of your presence. Angry, the dragon roars fire at you. Do you use your shield to stop the fire or duck? Answer shield or duck.")
+                                        ans = input()
+                                        answer = ans.lower().strip()
+                                        if answer == "duck":
+                                            print(
+                                                "Congratulations! You were able to survive, although the top of your hair got burnt off.")
+                                            print(
+                                                "You have a legend worthy fight with the dragon, but after you were finally hurt it’s wings the dragon rushes inside the cave. When you follow it inside in order to deal the final blow you notice that it is surrounding two eggs with its body.")
+
+                                            # Question 5
+                                            def main5():
+                                                print(
+                                                    "You realize that the dragon was only a parent trying to save its children and from the way the village looked the dragon had never attacked anyone. The king only sent you to kill it for the treasure. As you raise your sword you must make one final decision. Do you let the dragon live risking your own life or kill the dragon and taking your 40 percent of the mountain of treasure the king had promised you? Answer kill or live.")
+                                                ans = input()
+                                                answer = ans.lower().strip()
+                                                if answer == "live":
+                                                    print(
+                                                        "You lower your sword and slowly back away trying to look as harmless as possible. Before you are able to fully exit the cave you hear the dragon move and turn with sword in hand while in panic.")
+                                                    print(
+                                                        "After a few seconds you realize that the dragon had pushed treasure in your direction after understanding what it was that you were doing. You decide to take some of the treasure and make your way down the mountain.")
+                                                    print(
+                                                        "A few months after this event you are living in a different kingdom using the money you had gotten from the dragon and the king believing you had died in the cave.")
+                                                    print("")
+                                                    print("___________________________________________________")
+                                                    print(
+                                                        "Congratulations! Not only did you survive but you also kept your consciousness clean. This concludes the end of The Knight’s Final Quest, thanks for playing!")
+                                                    return menu()     #Goes back to the menu
+                                                elif answer == "kill":
+                                                    print(
+                                                        "You were able to kill the dragon and sent a letter to the kingdom through a pigeon.")
+                                                    print(
+                                                        "3 days letter the king’s men arrived at the cave and helped carry out the gold from the cave. You were also given a medal from the king in front of everyone, not only earning you the 40% of the gold that was promised to you, but also a title. All of this made your family very happy, but you lived with a heavy consciousness the rest of your life making you hate it when anyone would try to congratulate you on your kill.")
+                                                    print(
+                                                        "Congratulations! You survived and successfully killed the dragon. This concludes the end of The Knight’s Final Quest, thanks for playing!")
+                                                    return menu()
+                                                else:
+                                                    print(" ")
+                                                    print(
+                                                        "Sorry that is not a vaild response, please refer back to the instructions and try playing again. Say yes if you do otherwise the game will end.")
+                                                    restart = input("Will you like to start again from this point?")
+                                                    # This will restart the program from that question on
+                                                    if restart.lower() == "yes":
+                                                        main5()
+                                                    else:
+                                                        print(" ")
+                                                        print("Thanks for playing!")
+                                                        return menu()
+                                            main5()
+                                        elif answer == "shield":
+                                            print("The fire was to too hot and burned through your shield to you.")
+                                            print("Game over. Thank you for playing!")
+                                            return menu()
+                                        else:
+                                            print(" ")
+                                            print(
+                                                "Sorry that is not a vaild response, please refer back to the instructions and try playing again. Say yes if you do otherwise the game will end.")
+                                            restart = input("Will you like to start again from this point?")
+                                            if restart.lower() == "yes":
+                                                main4()
+                                            else:
+                                                print(" ")
+                                                print("Thanks for playing!")
+                                                return menu()
+
+                                    main4()
+                                elif answer == "basket":
+                                    print(
+                                        "As you careful go to grab the basket the cliff breaks under your weight and as you fall you realize that there was only a rotten sandwhich inside.")
+                                    print("Game Over. Thank you for playing!")
+                                    return menu()
+                                else:
+                                    print(" ")
+                                    print(
+                                        "Sorry that is not a vaild response, please refer back to the instructions and try playing again. Say yes if you do otherwise the game will end.")
+                                    restart = input("Will you like to start again from this point?")
+                                    if restart.lower() == "yes":
+                                        main3()
+                                    else:
+                                        print(" ")
+                                        print("Thanks for playing!")
+                                        return menu()
+
+                            main3()
+                        elif answer == "tunnel":
+                            # Question 6
+                            def main6():
+                                print(
+                                    "As you set through the tunnel you encounter a lot of monsters. You are starting to feel tired when a high level monster appears. You still have a few seconds before it notices you and while you look around for a place to hide you notice a big box you can hide in. This method will only work if the monster does not have a sense of smell. Do you choose to fight or risk hiding. Answer fight or hide.")
+                                ans = input()
+                                answer = ans.lower().strip()
+                                if answer == "hide":
+                                    print(
+                                        "You were able to get lucky and the monster did not have the ability to smell.")
+                                    print(
+                                        "After waiting for a while you get out of the box and check around before making your way to the top of the mountain.")
+
+                                    # Question 7
+                                    def main7():
+                                        print(
+                                            "After 1 day and a half you finally reach the cave where the dragon lives. As you head inside you step on a branch alerting the dragon of your presence. Angry, the dragon roars fire at you. Do you use your shield to stop the fire or duck? Answer shield or duck.")
+                                        ans = input()
+                                        answer = ans.lower().strip()
+                                        if answer == "duck":
+                                            print(
+                                                "Congratulations! You were able to survive, although the top of your hair got burnt off.")
+                                            print(
+                                                "You legend worthy fight with the dragon, but after you were finally cornered it’s wings the dragon rushes inside the cave. When you follow it inside in order to deal the final blow you notice that it is surrounding two eggs with its body.")
+
+                                            # Question 8
+                                            def main8():
+                                                print(
+                                                    "You realize that the dragon was only a parent trying to save its children and from the way the village looked the dragon had never attacked anyone. The king only sent you to kill it for the treasure. As you raise your sword you must make one final decision. Do you let the dragon live or kill the dragon risking your life or take your 40 percent of the mountain of treasure the king had promised you? Answer kill or live.")
+                                                ans = input()
+                                                answer = ans.lower().strip()
+                                                if answer == "live":
+                                                    print(
+                                                        "You lower your sword and slowly back away trying to look as harmless as possible. Before you are able to fully exit the cave you hear the dragon move and turn with sword in hand while in panic.")
+                                                    print(
+                                                        "After a few seconds you realize that the dragon had pushed treasure in your direction after understanding what it was that you were doing. You decide to take some of the treasure and make your way down the mountain.")
+                                                    print(
+                                                        "A few months after this event you are living in a different kingdom using the money you had gotten from the dragon and the king believing you had died in the cave.")
+                                                    print("")
+                                                    print("___________________________________________________")
+                                                    print(
+                                                        "Congratulations! Not only did you survive but you also kept your consciousness clean. This concludes the end of The Knight’s Final Quest, thanks for playing!")
+                                                    return menu()
+                                                elif answer == "kill":
+                                                    print(
+                                                        "You were able to kill the dragon and sent a letter to the kingdom through a pigeon.")
+                                                    print(
+                                                        "3 days letter the king’s men arrived at the cave and helped carry out the gold from the cave. You were also given a medal from the king in front of everyone, not only earning you the 40% of the gold that was promised to you, but also a title. All of this made your family very happy, but you lived with a heavy consciousness the rest of your life making you hate it when anyone would try to congratulate you on your kill.")
+                                                    print(
+                                                        "Congratulations! You survived and successfully killed the dragon. This concludes the end of The Knight’s Final Quest, thanks for playing!")
+                                                    return menu()
+                                                else:
+                                                    print(" ")
+                                                    print(
+                                                        "Sorry that is not a vaild response, please refer back to the instructions and try playing again. Say yes if you do otherwise the game will end.")
+                                                    restart = input("Will you like to start again from this point?")
+                                                    if restart.lower() == "yes":
+                                                        main8()
+                                                    else:
+                                                        print(" ")
+                                                        print("Thanks for playing!")
+                                                        return menu()
+
+                                            main8()
+                                        elif answer == "shield":
+                                            print("The fire was to too hot and burned through your shield to you.")
+                                            print("Game over. Thank you for playing!")
+                                            return menu()
+                                        else:
+                                            print(" ")
+                                            print(
+                                                "Sorry that is not a vaild response, please refer back to the instructions and try playing again. Say yes if you do otherwise the game will end.")
+                                            restart = input("Will you like to start again from this point?")
+                                            if restart.lower() == "yes":
+                                                main7()
+                                            else:
+                                                print(" ")
+                                                print("Thanks for playing!")
+                                                return menu()
+
+                                    main7()
+                                elif answer == "fight":
+                                    print("You didn't have enough energy to fight back and the monster killed you.")
+                                    print("Game over. Thank you for playing!")
+                                    return menu()
+                                else:
+                                    print(" ")
+                                    print(
+                                        "Sorry that is not a vaild response, please refer back to the instructions and try playing again. Say yes if you do otherwise the game will end.")
+                                    restart = input("Will you like to start again from this point?")
+                                    if restart.lower() == "yes":
+                                        main6()
+                                    else:
+                                        print(" ")
+                                        print("Thanks for playing!")
+                                        return menu()
+
+                            main6()
+                        else:
+                            print(" ")
+                            print(
+                                "Sorry that is not a vaild response, please refer back to the instructions and try playing again. Say yes if you do otherwise the game will end.")
+                            restart = input("Will you like to start again from this point?")
+                            if restart.lower() == "yes":
+                                main2()
+                            else:
+                                print(" ")
+                                print("Thanks for playing!")
+                                return menu()
+
+                    main2()
+                elif answer in no:
+                    print("The king was not happy with your disrespect and had someone chop your head off. ")
+                    print("Game over. Thank you for playing!")
+                    return menu()
+                else:
+                    print(" ")
+                    print(
+                        "Sorry that is not a vaild response, please refer back to the instructions and try playing again. Say yes if you do otherwise the game will end.")
+                    restart = input("Will you like to start again from this point?")
+                    if restart.lower() == "yes":
+                        main1()
+                    else:
+                        print(" ")
+                        print("Thanks for playing!")
+                        return menu()
+
+            main1()
+        main()
+
+
+    else:                                 # else statemnt incase any number is input that isnt a valid option
+        print("_____________")
+        print("Invalid Entry")
+
+    print()                             # will ask you to enter another input since last was invalid
+    menu()
+    option = int(input("Enter your option: "))
+
+print()                                 # goodbye message when they exit the menu
+print("**********************")
+print("*- Hope You Had Fun -*")
+print("**********************")
